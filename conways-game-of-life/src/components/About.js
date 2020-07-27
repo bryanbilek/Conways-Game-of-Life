@@ -2,7 +2,7 @@ import React from "react";
 
 function About() {
   return (
-    <div className="About">
+    <div className="about">
       <h1>About Conway's Game of Life</h1>
       <p>
         The Game of Life is a cellular automaton invented by Cambridge
