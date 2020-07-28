@@ -1,25 +1,25 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 
 function GridNavBar() {
-  const handleStart = () => {};
-  const handleStop = () => {};
-  const handleClear = () => {};
-  const preset1 = () => {};
-  const preset2 = () => {};
-  const preset3 = () => {};
+  const [evolutions, setEvolutions] = useState(false);
+
+  const handleStartStop = () => {
+    setEvolutions(!evolutions);
+  };
 
   return (
     <div className="grid-nav-bar">
       <div className="grid-game-buttons">
-        <button onClick={handleStart}>Start</button>
-        <button onClick={handleStop}>Stop</button>
-        <button onClick={handleClear}>Clear</button>
+        <button onClick={handleStartStop}>
+          {evolutions ? "stop" : "start"}
+        </button>
+        {/* <button onClick={handleClear}>Clear</button> */}
       </div>
-      <div className="grid-preset-configs">
+      {/* <div className="grid-preset-configs">
         <button onClick={preset1}>Preset 1</button>
         <button onClick={preset2}>Preset 2</button>
         <button onClick={preset3}>Preset 3</button>
-      </div>
+      </div> */}
     </div>
   );
 }

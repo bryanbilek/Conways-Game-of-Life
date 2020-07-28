@@ -1,7 +1,8 @@
 import React, { useState } from "react";
+import produce from "immer";
 
-let gridRows = 50;
-let gridCols = 50;
+let gridRows = 25;
+let gridCols = 25;
 
 function Grid() {
   const [grid, setGrid] = useState(() => {
@@ -24,6 +25,12 @@ function Grid() {
         rows.map((col, k) => (
           <div
             key={`{i}-{k}`}
+            onClick={() => {
+              const newGrid = produce(grid, (gridcopy) => {
+                gridcopy[i][k] = grid[i][k] ? 0 : 1;
+              });
+              setGrid(newGrid);
+            }}
             style={{
               width: 20,
               height: 20,
