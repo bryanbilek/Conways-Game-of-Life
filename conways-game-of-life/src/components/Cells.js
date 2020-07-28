@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 
 function Cells() {
-  return <div></div>;
+  const [alive, setAlive] = useState();
+  return <div className="cells"></div>;
 }
 
 export default Cells;

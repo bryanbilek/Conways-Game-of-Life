@@ -1,33 +1,38 @@
 import React, { useState } from "react";
 
+let gridRows = 50;
+let gridCols = 50;
+
 function Grid() {
+  const [grid, setGrid] = useState(() => {
+    const rows = [];
+    for (let i = 0; i < gridRows; i++) {
+      rows.push(Array.from(Array(gridCols), () => 0));
+    }
+    return rows;
+  });
   const [generations, setGenerations] = useState(0);
 
-  const handleStart = () => {};
-
-  const handleStop = () => {};
-
-  const handleClear = () => {};
-
-  const preset1 = () => {};
-
-  const preset2 = () => {};
-
-  const preset3 = () => {};
-
   return (
-    <div className="grid">
-      <p>Generations: {generations}</p>
-      <div className="grid-game-buttons">
-        <button onClick={handleStart}>Start</button>
-        <button onClick={handleStop}>Stop</button>
-        <button onClick={handleClear}>Clear</button>
-      </div>
-      <div className="grid-preset-configs">
-        <button onClick={preset1}>Preset 1</button>
-        <button onClick={preset2}>Preset 2</button>
-        <button onClick={preset3}>Preset 3</button>
-      </div>
+    <div
+      style={{
+        display: "grid",
+        gridTemplateColumns: `repeat(${gridCols}, 20px)`,
+      }}
+    >
+      {grid.map((rows, i) =>
+        rows.map((col, k) => (
+          <div
+            key={`{i}-{k}`}
+            style={{
+              width: 20,
+              height: 20,
+              backgroundColor: grid[i][k] ? "black" : undefined,
+              border: "1px solid red",
+            }}
+          />
+        ))
+      )}
     </div>
   );
 }
