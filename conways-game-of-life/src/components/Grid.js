@@ -15,14 +15,18 @@ const neighborOperations = [
   [-1, 0]
 ]
 
+const emptyGrid = () => {
+  const rows = [];
+  for (let i = 0; i < gridRows; i++) {
+    rows.push(Array.from(Array(gridCols), () => 0));
+  }
+  return rows;
+}
+
 function Grid() {
   //grid creation
   const [grid, setGrid] = useState(() => {
-    const rows = [];
-    for (let i = 0; i < gridRows; i++) {
-      rows.push(Array.from(Array(gridCols), () => 0));
-    }
-    return rows;
+    return emptyGrid();   
   });
 
   //setting state for each evolution
@@ -71,11 +75,25 @@ function Grid() {
     setTimeout(runEvolutions, 1000);
   }, [])
 
+  const handleClear = () => {
+    setGrid(emptyGrid());
+  }
+
+  const handleRandom = () => {
+    const rows = [];
+    for (let i = 0; i < gridRows; i++) {
+      rows.push(Array.from(Array(gridCols), () => Math.random() > 0.7 ? 1 : 0));
+    }
+    setGrid(rows);    
+  }
+
   const [generations, setGenerations] = useState(0);
 
   return (
     <>
-    <button onClick={handleStartStop}>{evolutions ? "stop" : "start"}</button>
+    <button onClick={handleStartStop}>{evolutions ? "Stop" : "Start"}</button>
+    <button onClick={handleClear}>Clear</button>
+    <button onClick={handleRandom}>Random</button>
     <div
       style={{
         display: "grid",
