@@ -83,6 +83,14 @@ function Grid() {
     setTimeout(runEvolutions, 1000);
   }, []);
 
+  const handleSpeedUp = () => {
+    return setTimeout(runEvolutions, 200);
+  };
+
+  const handleSlowDown = () => {
+    return setTimeout(runEvolutions, 2000);
+  };
+
   const handleClear = () => {
     setGrid(emptyGrid());
     setGenerations(0);
@@ -170,18 +178,24 @@ function Grid() {
 
   return (
     <>
-      <button onClick={handleStartStop}>{evolutions ? "Stop" : "Start"}</button>
-      <button onClick={handleClear}>Clear</button>
-      <button onClick={handleRandom}>Random</button>
-      <button onClick={handlePresetPlus}>Plus</button>
-      <button onClick={handlePresetHello}>'Hello'</button>
-      <div>Generations: {generations}</div>
+      <div className="controls">
+        <button onClick={handleStartStop}>
+          {evolutions ? "Stop" : "Start"}
+        </button>
+        <button onClick={handleSpeedUp}>Speed Up!</button>
+        <button onClick={handleSlowDown}>Slow Down...</button>
+        <button onClick={handleClear}>Clear</button>
+        <button onClick={handleRandom}>Random</button>
+        <button onClick={handlePresetPlus}>Plus</button>
+        <button onClick={handlePresetHello}>'Hello'</button>
+      </div>
+      <p>Generations: {generations}</p>
       <div
         style={{
           display: "grid",
           textAlign: "center",
           gridTemplateColumns: `repeat(${gridCols}, 20px)`,
-          width: "100%",
+          marginLeft: "5%",
         }}
       >
         {grid.map((rows, i) =>
@@ -201,8 +215,8 @@ function Grid() {
               style={{
                 width: 20,
                 height: 20,
-                backgroundColor: grid[i][k] ? "black" : undefined,
-                border: "1px solid black",
+                backgroundColor: grid[i][k] ? "red" : undefined,
+                border: "1px solid red",
               }}
             />
           ))
