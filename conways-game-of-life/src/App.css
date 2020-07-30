@@ -1,0 +1,30 @@
+.App {
+  text-align: center;
+  background-color: white;
+}
+
+.about {
+  width: 100%;
+}
+
+h1 {
+  color: red;
+}
+
+button {
+  background-color: red;
+  color: white;
+  width: 7%;
+  border-radius: 5%;
+  margin: 0 0.25%;
+}
+
+button:hover {
+  transform: scale(1.5);
+  background-color: white;
+  color: red;
+}
+
+p {
+  color: red;
+}
