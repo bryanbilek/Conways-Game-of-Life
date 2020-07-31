@@ -4,6 +4,7 @@ import produce from "immer";
 let gridRows = 25;
 let gridCols = 25;
 
+//setup neighbors to cells
 const neighborOperations = [
   [0, 1],
   [0, -1],
@@ -15,6 +16,7 @@ const neighborOperations = [
   [-1, 0],
 ];
 
+//initialize new grid of 0s
 const emptyGrid = () => {
   const rows = [];
   for (let i = 0; i < gridRows; i++) {
@@ -24,7 +26,7 @@ const emptyGrid = () => {
 };
 
 function Grid() {
-  //grid creation
+  //grid creation in state
   const [grid, setGrid] = useState(() => {
     return emptyGrid();
   });
@@ -39,9 +41,9 @@ function Grid() {
       runEvolutions();
     }
   };
-
+  //putting generations in state starting at 0
   const [generations, setGenerations] = useState(0);
-
+  //making a ref for evolutions 
   const evolutionsRef = useRef();
   evolutionsRef.current = evolutions;
 
@@ -49,7 +51,7 @@ function Grid() {
     if (!evolutionsRef.current) {
       return;
     }
-
+    //produce a new copy of the grid so original remains immutable
     setGrid((grid) => {
       return produce(grid, (gridcopy) => {
         for (let i = 0; i < gridRows; i++) {
@@ -59,7 +61,7 @@ function Grid() {
             neighborOperations.forEach(([x, y]) => {
               const newI = i + x;
               const newK = k + y;
-
+              //make sure we stay in bounds around the edges of the grid
               if (
                 newI >= 0 &&
                 newI < gridRows &&
@@ -69,7 +71,7 @@ function Grid() {
                 neighborCells += grid[newI][newK];
               }
             });
-
+            //conditions for following the rules of the game of life
             if (neighborCells < 2 || neighborCells > 3) {
               gridcopy[i][k] = 0;
             } else if (grid[i][k] === 0 && neighborCells === 3) {
@@ -79,6 +81,7 @@ function Grid() {
         }
       });
     });
+    //add 1 to the generations count in state also each evolution takes 1 second
     setGenerations((g) => g + 1);
     setTimeout(runEvolutions, 1000);
   }, []);
@@ -191,9 +194,9 @@ function Grid() {
       </div>
       <p>Generations: {generations}</p>
       <div
+        //creates the grid
         style={{
           display: "grid",
-          textAlign: "center",
           gridTemplateColumns: `repeat(${gridCols}, 20px)`,
           marginLeft: "5%",
         }}
