@@ -90,9 +90,9 @@ function Grid() {
     return setTimeout(runEvolutions, 200);
   };
 
-  const handleSlowDown = () => {
-    return setTimeout(runEvolutions, 2000);
-  };
+  // const handleSlowDown = () => {
+  //   return setTimeout(runEvolutions, 2000);
+  // };
 
   const handleClear = () => {
     setGrid(emptyGrid());
@@ -186,7 +186,7 @@ function Grid() {
           {evolutions ? "Stop" : "Start"}
         </button>
         <button onClick={handleSpeedUp}>Speed Up!</button>
-        <button onClick={handleSlowDown}>Slow Down...</button>
+        {/* <button onClick={handleSlowDown}>Slow Down...</button> */}
         <button onClick={handleClear}>Clear</button>
         <button onClick={handleRandom}>Random</button>
         <button onClick={handlePresetPlus}>Plus</button>
